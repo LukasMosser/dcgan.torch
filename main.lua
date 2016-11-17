@@ -49,7 +49,7 @@ local function weights_init(m)
    end
 end
 
-local nc = 3
+local nc = 1
 local nz = opt.nz
 local ndf = opt.ndf
 local ngf = opt.ngf
@@ -114,7 +114,7 @@ optimStateD = {
    beta1 = opt.beta1,
 }
 ----------------------------------------------------------------------------
-local input = torch.Tensor(opt.batchSize, 3, opt.fineSize, opt.fineSize)
+local input = torch.Tensor(opt.batchSize, nc, opt.fineSize, opt.fineSize)
 local noise = torch.Tensor(opt.batchSize, nz, 1, 1)
 local label = torch.Tensor(opt.batchSize)
 local errD, errG
@@ -214,6 +214,8 @@ for epoch = 1, opt.niter do
 
       -- (2) Update G network: maximize log(D(G(z)))
       optim.adam(fGx, parametersG, optimStateG)
+	  
+	  optim.adam(fGx, parametersG, optimStateG)
 
       -- display
       counter = counter + 1
