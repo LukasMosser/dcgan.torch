@@ -5,13 +5,13 @@ require 'optim'
 opt = {
    dataset = 'lsun',       -- imagenet / lsun / folder
    batchSize = 64,
-   loadSize = 96,
+   loadSize = 65,
    fineSize = 64,
    nz = 100,               -- #  of dim for Z
-   ngf = 64,               -- #  of gen filters in first conv layer
+   ngf = 128,               -- #  of gen filters in first conv layer
    ndf = 64,               -- #  of discrim filters in first conv layer
    nThreads = 4,           -- #  of data loading threads to use
-   niter = 25,             -- #  of iter at starting learning rate
+   niter = 50,             -- #  of iter at starting learning rate
    lr = 0.0002,            -- initial learning rate for adam
    beta1 = 0.5,            -- momentum term of adam
    ntrain = math.huge,     -- #  of examples per epoch. math.huge for full dataset
@@ -219,12 +219,12 @@ for epoch = 1, opt.niter do
 
       -- display
       counter = counter + 1
-      if counter % 10 == 0 and opt.display then
-          local fake = netG:forward(noise_vis)
-          local real = data:getBatch()
-          disp.image(fake, {win=opt.display_id, title=opt.name})
-          disp.image(real, {win=opt.display_id * 3, title=opt.name})
-      end
+      --if counter % 10 == 0 and opt.display then
+      --    local fake = netG:forward(noise_vis)
+      --    local real = data:getBatch()
+      --    disp.image(fake, {win=opt.display_id, title=opt.name})
+      --    disp.image(real, {win=opt.display_id * 3, title=opt.name})
+      --end
 
       -- logging
       if ((i-1) / opt.batchSize) % 1 == 0 then
