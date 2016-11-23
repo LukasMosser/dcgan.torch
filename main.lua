@@ -9,7 +9,7 @@ opt = {
    fineSize = 64,
    nz = 100,               -- #  of dim for Z
    ngf = 128,               -- #  of gen filters in first conv layer
-   ndf = 64,               -- #  of discrim filters in first conv layer
+   ndf = 128,               -- #  of discrim filters in first conv layer
    nThreads = 4,           -- #  of data loading threads to use
    niter = 50,             -- #  of iter at starting learning rate
    lr = 0.0002,            -- initial learning rate for adam
@@ -27,7 +27,7 @@ for k,v in pairs(opt) do opt[k] = tonumber(os.getenv(k)) or os.getenv(k) or opt[
 print(opt)
 if opt.display == 0 then opt.display = false end
 
-opt.manualSeed = torch.random(1, 10000) -- fix seed
+opt.manualSeed = 42 -- fix seed
 print("Random Seed: " .. opt.manualSeed)
 torch.manualSeed(opt.manualSeed)
 torch.setnumthreads(1)
